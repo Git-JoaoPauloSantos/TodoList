@@ -1,0 +1,17 @@
+.container-form{
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 3rem auto;
+}
+.container-form input{
+    padding: .3rem;
+}
+.container-form button{
+    background-color: transparent;
+    border: none;
+    color: transparent;
+    margin: 0;
+    padding: 0;
+}

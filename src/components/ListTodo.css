@@ -1,0 +1,11 @@
+.todo-list {
+  margin: 2rem;
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+#complete{
+    background-color: red;
+    color: blue;
+}
