@@ -61,9 +61,7 @@ const Home = () => {
     return (
         <div>
             <ButtonAppBar />
-            <hr />
             <Form addTask={addTask} />
-
             {tarefas ? (
                 <ListTodo
                     tarefas={tarefas}

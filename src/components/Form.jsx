@@ -17,20 +17,21 @@ const Form = ({ addTask }) => {
     return (
         <form onSubmit={(e) => e.preventDefault()} className="container-form">
             <TextField
-                sx={{ width: "20%" }}
+                sx={{ width: "30%" }}
                 onChange={(e) => setInputTitleText(e.target.value)}
                 value={inputTitleText}
                 label="Título"
                 variant="standard" />
 
             <TextField
+                sx={{ width: "70%" }}
                 onChange={(e) => setInputText(e.target.value)}
                 value={inputText}
                 label="Digite sua tarefa"
                 variant="standard" />
             {inputText && (
                 <Button
-                    sx={{ height: "48px", marginLeft: "5px" }}
+                    sx={{ marginLeft: "5px" }}
                     onClick={() => validacaoinput(inputTitleText, inputText)}
                     variant="contained"
                     component="label">
@@ -39,8 +40,8 @@ const Form = ({ addTask }) => {
                 </Button>)}
             {!inputText && (
                 <Button
-                disabled
-                    sx={{ height: "48px", marginLeft: "5px" }}
+                    disabled
+                    sx={{ marginLeft: "5px" }}
                     onClick={() => validacaoinput(inputTitleText, inputText)}
                     variant="contained"
                     component="label">

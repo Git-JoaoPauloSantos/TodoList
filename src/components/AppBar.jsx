@@ -10,9 +10,9 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 
 export default function ButtonAppBar() {
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1}}>
       <AppBar position="static">
-        <Toolbar>
+        <Toolbar sx={{ height: "100px" }}>
           <IconButton
             size="large"
             edge="start"
