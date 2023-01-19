@@ -1,5 +1,5 @@
 import { Button, Card, CardActions, CardContent, Typography } from '@mui/material'
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 
 
 import React from 'react'
@@ -16,7 +16,7 @@ const CardCompleteTask = ({ tarefa, index, completeTask, deleteTask }) => {
             }}>
             <CardContent>
                 <Typography
-                textTransform="capitalize"
+                    textTransform="capitalize"
                     sx={{
                         display: "flex",
                         justifyContent: "space-between",
@@ -26,7 +26,7 @@ const CardCompleteTask = ({ tarefa, index, completeTask, deleteTask }) => {
                     component="div">
                     {tarefa.titleTask} <span><CheckCircleIcon sx={{ color: "#4caf50" }} /></span>
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
+                <Typography variant="body1" color="text.secondary">
                     {tarefa.task}
                 </Typography>
             </CardContent>
@@ -35,8 +35,8 @@ const CardCompleteTask = ({ tarefa, index, completeTask, deleteTask }) => {
                     display: "flex",
                     justifyContent: "end"
                 }}>
-                <Button onClick={() => completeTask(index)} size="small">Completa</Button>
-                <Button onClick={() => deleteTask(index)} size="small">Apagar</Button>
+                <Button color='success' onClick={() => completeTask(index)} size="small">Completa</Button>
+                <Button color='warning' onClick={() => deleteTask(index)} size="small">Apagar</Button>
             </CardActions>
         </Card>
     )

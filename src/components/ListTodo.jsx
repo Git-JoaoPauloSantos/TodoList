@@ -6,9 +6,9 @@ const ListTodo = ({ tarefas, completeTask, deleteTask }) => {
     return (
         <div className="todo-list">
             {tarefas.map((tarefa, index) => (
-                (!tarefa.isComplete ?
-                    <CardTask key={index} tarefa={tarefa} index={index} completeTask={completeTask} deleteTask={deleteTask} />
-                    : <CardCompleteTask key={index} tarefa={tarefa} index={index} completeTask={completeTask} deleteTask={deleteTask} />)
+
+                <CardTask key={index} tarefa={tarefa} index={index} completeTask={completeTask} deleteTask={deleteTask} />
+
 
             ))}
         </div>

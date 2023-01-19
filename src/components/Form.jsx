@@ -17,18 +17,15 @@ const Form = ({ addTask }) => {
     return (
         <form onSubmit={(e) => e.preventDefault()} className="container-form">
             <TextField
-                onSubmit={false}
                 sx={{ width: "20%" }}
                 onChange={(e) => setInputTitleText(e.target.value)}
                 value={inputTitleText}
-                id="standard-basic"
                 label="Título"
                 variant="standard" />
 
             <TextField
                 onChange={(e) => setInputText(e.target.value)}
                 value={inputText}
-                id="standard-basic"
                 label="Digite sua tarefa"
                 variant="standard" />
             {inputText && (
