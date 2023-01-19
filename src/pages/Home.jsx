@@ -37,18 +37,27 @@ const Home = () => {
         setTarefas(newTarefas)
     }
 
+    const fixedTask = (index) => {
+        let newTarefas = [...tarefas]
+        newTarefas[index].isFixed = !newTarefas[index].isFixed
+        setTarefas(newTarefas)
+    }
+
     const saveTaskLocalStorage = (tasksToSave) => {
         localStorage.setItem("tasks", JSON.stringify(tasksToSave))
     }
 
     const loadTasks = () => {
         const loadedTasks = JSON.parse(localStorage.getItem("tasks"))
-        return loadedTasks
+        const orderedLoadedTasks = loadedTasks.sort((a, b) => (a.isFixed > b.isFixed ? -1 : 1))
+        return orderedLoadedTasks
     }
 
     useEffect(() => {
         if (tarefas) {
             saveTaskLocalStorage(tarefas)
+            const orderedLoadedTasks = loadTasks()
+            setTarefas(orderedLoadedTasks)
 
         }
     }, [tarefas])
@@ -66,7 +75,8 @@ const Home = () => {
                 <ListTodo
                     tarefas={tarefas}
                     completeTask={completeTask}
-                    deleteTask={deleteTask} />
+                    deleteTask={deleteTask}
+                    fixedTask={fixedTask} />
             ) : null}
         </div>
 
