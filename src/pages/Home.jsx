@@ -6,7 +6,7 @@ import ButtonAppBar from '../components/AppBar';
 
 
 const Home = () => {
-    const [tasks, setTasks] = useState([]);
+    const [tasks, setTasks] = useState();
 
     const addTask = (titleTask, inputText) => {
         if (inputText) {
