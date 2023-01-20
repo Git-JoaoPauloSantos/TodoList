@@ -5,7 +5,7 @@ import PushPinOutlinedIcon from '@mui/icons-material/PushPinOutlined';
 import React, { useState } from 'react'
 import EditTaskDialog from './EditTaskDialog';
 
-const CardTask = ({ task, index, completeTask, deleteTask, fixedTask, editTask }) => {
+const CardTask = ({ task, completeTask, deleteTask, fixedTask, editTask }) => {
     const [openEditDialog, setOpenEditDialog] = useState(false)
 
     const dialogHandler = () => {
@@ -19,7 +19,6 @@ const CardTask = ({ task, index, completeTask, deleteTask, fixedTask, editTask }
                 openEditDialog={openEditDialog}
                 dialogHandler={dialogHandler}
                 task={task}
-                index={index}
                 editTask={editTask} />
             <Card
                 sx={{
@@ -29,7 +28,9 @@ const CardTask = ({ task, index, completeTask, deleteTask, fixedTask, editTask }
                     justifyContent: "space-between",
                     background: (task.isComplete ? "#90caf9" : "")
                 }}>
-                <CardContent sx={{ cursor: "pointer" }}>
+                <CardContent
+                    onClick={() => setOpenEditDialog(true)}
+                    sx={{ cursor: "pointer" }}>
                     <Typography
                         sx={{
                             display: "flex",
@@ -57,16 +58,18 @@ const CardTask = ({ task, index, completeTask, deleteTask, fixedTask, editTask }
                     </Typography>
                     <Typography
                         variant="body1"
-                        color="text.secondary"
-                        onClick={() => setOpenEditDialog(true)}>
+                        color="text.secondary">
                         {task.task}
                     </Typography>
                 </CardContent>
                 <CardActions
-                    sx={{ display: "flex", justifyContent: "space-evenly" }}>
+                    sx={{
+                        display: "flex",
+                        justifyContent: "space-evenly"
+                    }}>
                     <CardActions>
                         <Button
-                            onClick={() => fixedTask(index)}
+                            onClick={() => fixedTask(task.id)}
                             color={task.isFixed ? "primary" : "inherit"}
                             variant={task.isFixed ? "contained" : "text"}
                             size='small'>
@@ -79,12 +82,12 @@ const CardTask = ({ task, index, completeTask, deleteTask, fixedTask, editTask }
                         <Button
                             variant='outlined'
                             color={task.isComplete ? "inherit" : "primary"}
-                            onClick={() => completeTask(index)}
+                            onClick={() => completeTask(task.id)}
                             size="small">Completa</Button>
                         <Button
                             variant='outlined'
                             color='error'
-                            onClick={() => deleteTask(index)}
+                            onClick={() => deleteTask(task.id)}
                             size="small">Apagar</Button>
                     </CardActions>
 
@@ -93,5 +96,4 @@ const CardTask = ({ task, index, completeTask, deleteTask, fixedTask, editTask }
         </React.Fragment>
     )
 }
-
 export default CardTask

@@ -1,4 +1,3 @@
-import './Form.css'
 import { useState } from "react";
 import { Button, TextField } from '@mui/material';
 
@@ -25,46 +24,29 @@ const Form = ({ addTask }) => {
                 gap: ".3rem"
             }}>
             <TextField
-                sx={{ width: "30%" }}
                 onChange={(e) => setInputTitleText(e.target.value)}
+                sx={{ width: "30%" }}
                 value={inputTitleText}
                 label="Título"
                 variant="standard" />
 
             <TextField
-                sx={{ width: "70%" }}
                 onChange={(e) => setInputText(e.target.value)}
+                sx={{ width: "70%" }}
                 value={inputText}
-                label="Digite sua task"
+                label="Contúdo da tarefa"
                 variant="standard" />
             <Button
+                onClick={() => validatesInput(inputTitleText, inputText)}
                 disabled={inputText ? false : true}
                 sx={{ marginLeft: "5px" }}
-                onClick={() => validatesInput(inputTitleText, inputText)}
                 variant="contained"
                 component="label">
                 Salvar
                 <button style={{ backgroundColor: "transparent", border: "none" }}></button>
             </Button>
-
         </form>
     )
 }
 
 export default Form
-
-{/* 
-
-<input
-onChange={(e) => setInputTitleText(e.target.value)}
-type="text"
-value={inputTitleText}
-placeholder="Título da task" />
-
-<input
-onChange={(e) => setInputText(e.target.value)}
-type="text"
-value={inputText}
-placeholder="Digite uma task" /> 
-
-*/}

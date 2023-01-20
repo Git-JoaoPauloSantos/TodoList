@@ -3,16 +3,15 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { TextField } from '@mui/material';
 
-export default function EditTaskDialog({ openEditDialog, dialogHandler, task, index, editTask }) {
+export default function EditTaskDialog({ openEditDialog, dialogHandler, task, editTask }) {
     const [newText, setNewText] = React.useState(task.task)
     const [newTitle, setnewTitle] = React.useState(task.titleTask)
 
     const textHandler = () => {
-        editTask(index, newText, newTitle)
+        editTask(task.id, newTitle, newText)
         dialogHandler()
     }
 
@@ -25,25 +24,26 @@ export default function EditTaskDialog({ openEditDialog, dialogHandler, task, in
             aria-describedby="alert-dialog-description"
             fullWidth
         >
-            <DialogTitle id="alert-dialog-title">
-                {"Edite a sua task"}
+            <DialogTitle textTransform="uppercase" >
+                Edite a sua tarefa
             </DialogTitle>
             <DialogContent>
-                <TextField sx={{ margin: "1.5rem 0" }}
+                <TextField
+                    onChange={(e) => setnewTitle(e.target.value)}
+                    sx={{ margin: "1.5rem 0" }}
                     label="Título"
                     variant="standard"
                     fullWidth
                     defaultValue={newTitle}
-                    onChange={(e) => setnewTitle(e.target.value)}
                 />
                 <TextField
+                    onChange={(e) => setNewText(e.target.value)}
                     label="Texto da task"
                     multiline
                     maxRows={4}
                     variant="standard"
                     fullWidth
                     defaultValue={newText}
-                    onChange={(e) => setNewText(e.target.value)}
                 />
             </DialogContent>
             <DialogActions>

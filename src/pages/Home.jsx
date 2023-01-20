@@ -1,4 +1,3 @@
-import './Home.css'
 import { useEffect, useState } from "react"
 import Form from "../components/Form";
 import ListTodo from "../components/ListTodo";
@@ -11,6 +10,7 @@ const Home = () => {
     const addTask = (titleTask, inputText) => {
         if (inputText) {
             const newTask = {
+                id: generateId(),
                 titleTask: titleTask,
                 task: inputText,
                 isComplete: false,
@@ -23,24 +23,31 @@ const Home = () => {
         console.log(tasks)
     }
 
-    const deleteTask = (index) => {
-        let newtasks = [...tasks];
-        newtasks.splice(index, 1)
-
-        setTasks(newtasks)
-
+    const generateId = () => {
+        return Math.floor(Math.random() * 10000)
     }
 
-    const completeTask = (index) => {
-        const newtasks = [...tasks]
-        newtasks[index].isComplete = !newtasks[index].isComplete
-        setTasks(newtasks)
+    const deleteTask = (id) => {
+        let newTasks = [...tasks];
+        newTasks = newTasks.filter(task => task.id !== id)
+
+        setTasks(newTasks)
     }
 
-    const fixedTask = (index) => {
-        const newtasks = [...tasks]
-        newtasks[index].isFixed = !newtasks[index].isFixed
-        setTasks(newtasks)
+    const completeTask = (id) => {
+        let newTasks = [...tasks]
+        const targetTask = newTasks.filter((task) => task.id === id)[0]
+        targetTask.isComplete = !targetTask.isComplete
+
+        setTasks(newTasks)
+    }
+
+    const fixedTask = (id) => {
+        let newTasks = [...tasks]
+        const targetTask = newTasks.filter((task) => task.id === id)[0]
+        targetTask.isFixed = !targetTask.isFixed
+
+        setTasks(newTasks)
     }
 
     const saveTaskLocalStorage = (tasksToSave) => {
@@ -53,25 +60,27 @@ const Home = () => {
         return orderedLoadedTasks
     }
 
-    const editTask = (index, newText, newTitle) => {
-        let newTask = [...tasks]
-        newTask[index].titleTask = newTitle
-        newTask[index].task = newText
+    const editTask = (id, newTitle, newText) => {
+        let newTasks = [...tasks]
+        const targetTask = newTasks.filter((task) => task.id === id)[0]
+        targetTask.titleTask = newTitle
+        targetTask.task = newText
 
-        setTasks(newTask)
+        setTasks(newTasks)
     }
 
     useEffect(() => {
         if (tasks) {
             saveTaskLocalStorage(tasks)
             const orderedLoadedTasks = loadTasks()
-            setTasks(orderedLoadedTasks)
 
+            setTasks(orderedLoadedTasks)
         }
     }, [tasks])
 
     useEffect(() => {
         const loadedTasks = loadTasks()
+        
         setTasks(loadedTasks)
     }, [])
 

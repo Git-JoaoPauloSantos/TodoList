@@ -1,13 +1,11 @@
 import CardTask from './CardTask'
-import './ListTodo.css'
 const ListTodo = ({ tasks, completeTask, deleteTask, fixedTask, editTask }) => {
     return (
-        <div className="todo-list">
-            {tasks.map((task, index) => (
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "2rem", margin: "2rem"}}>
+            {tasks.map((task) => (
                 <CardTask
-                    key={index}
+                    key={task.id}
                     task={task}
-                    index={index}
                     completeTask={completeTask}
                     deleteTask={deleteTask}
                     fixedTask={fixedTask}
