@@ -7,16 +7,4 @@
     margin: 3rem auto;
     gap: .2rem;
 }
-.container-form .btn-container{
-    height: 100%;
-    display: flex;
-    justify-content: end;
-    align-items: flex-end;
-}
-.container-form button{
-    background-color: transparent;
-    border: none;
-    color: transparent;
-    margin: 0;
-    padding: 0;
-}
+

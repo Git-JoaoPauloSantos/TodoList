@@ -1,16 +1,17 @@
 import CardTask from './CardTask'
 import './ListTodo.css'
-const ListTodo = ({ tarefas, completeTask, deleteTask, fixedTask }) => {
+const ListTodo = ({ tasks, completeTask, deleteTask, fixedTask, editTask }) => {
     return (
         <div className="todo-list">
-            {tarefas.map((tarefa, index) => (
+            {tasks.map((task, index) => (
                 <CardTask
                     key={index}
-                    tarefa={tarefa}
+                    task={task}
                     index={index}
                     completeTask={completeTask}
                     deleteTask={deleteTask}
-                    fixedTask={fixedTask} />
+                    fixedTask={fixedTask}
+                    editTask={editTask} />
             ))}
         </div>
     )

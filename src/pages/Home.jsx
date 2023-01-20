@@ -6,7 +6,7 @@ import ButtonAppBar from '../components/AppBar';
 
 
 const Home = () => {
-    const [tarefas, setTarefas] = useState();
+    const [tasks, setTasks] = useState([]);
 
     const addTask = (titleTask, inputText) => {
         if (inputText) {
@@ -17,30 +17,30 @@ const Home = () => {
                 isFixed: false
             }
 
-            setTarefas([...(tarefas || []), newTask])
+            setTasks([...(tasks || []), newTask])
 
         }
-        console.log(tarefas)
+        console.log(tasks)
     }
 
     const deleteTask = (index) => {
-        let newTarefas = [...tarefas];
-        newTarefas.splice(index, 1)
+        let newtasks = [...tasks];
+        newtasks.splice(index, 1)
 
-        setTarefas(newTarefas)
+        setTasks(newtasks)
 
     }
 
     const completeTask = (index) => {
-        let newTarefas = [...tarefas]
-        newTarefas[index].isComplete = !newTarefas[index].isComplete
-        setTarefas(newTarefas)
+        const newtasks = [...tasks]
+        newtasks[index].isComplete = !newtasks[index].isComplete
+        setTasks(newtasks)
     }
 
     const fixedTask = (index) => {
-        let newTarefas = [...tarefas]
-        newTarefas[index].isFixed = !newTarefas[index].isFixed
-        setTarefas(newTarefas)
+        const newtasks = [...tasks]
+        newtasks[index].isFixed = !newtasks[index].isFixed
+        setTasks(newtasks)
     }
 
     const saveTaskLocalStorage = (tasksToSave) => {
@@ -53,30 +53,39 @@ const Home = () => {
         return orderedLoadedTasks
     }
 
+    const editTask = (index, newText, newTitle) => {
+        let newTask = [...tasks]
+        newTask[index].titleTask = newTitle
+        newTask[index].task = newText
+
+        setTasks(newTask)
+    }
+
     useEffect(() => {
-        if (tarefas) {
-            saveTaskLocalStorage(tarefas)
+        if (tasks) {
+            saveTaskLocalStorage(tasks)
             const orderedLoadedTasks = loadTasks()
-            setTarefas(orderedLoadedTasks)
+            setTasks(orderedLoadedTasks)
 
         }
-    }, [tarefas])
+    }, [tasks])
 
     useEffect(() => {
         const loadedTasks = loadTasks()
-        setTarefas(loadedTasks)
+        setTasks(loadedTasks)
     }, [])
 
     return (
         <div>
             <ButtonAppBar />
             <Form addTask={addTask} />
-            {tarefas ? (
+            {tasks ? (
                 <ListTodo
-                    tarefas={tarefas}
+                    tasks={tasks}
                     completeTask={completeTask}
                     deleteTask={deleteTask}
-                    fixedTask={fixedTask} />
+                    fixedTask={fixedTask}
+                    editTask={editTask} />
             ) : null}
         </div>
 

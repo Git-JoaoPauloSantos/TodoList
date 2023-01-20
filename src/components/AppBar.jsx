@@ -23,7 +23,7 @@ export default function ButtonAppBar() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-            Lista de Tarefas
+            Lista de tasks
           </Typography>
           <Typography sx={{ marginRight: "5px" }}>
             João Paulo

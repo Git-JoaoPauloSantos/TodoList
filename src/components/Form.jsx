@@ -6,7 +6,7 @@ const Form = ({ addTask }) => {
     const [inputText, setInputText] = useState('');
     const [inputTitleText, setInputTitleText] = useState('');
 
-    const validacaoinput = (inputTitleText, inputText) => {
+    const validatesInput = (inputTitleText, inputText) => {
         if (inputText) {
             addTask(inputTitleText, inputText)
         }
@@ -15,7 +15,15 @@ const Form = ({ addTask }) => {
     }
 
     return (
-        <form onSubmit={(e) => e.preventDefault()} className="container-form">
+        <form
+            onSubmit={(e) => e.preventDefault()}
+            style={{
+                maxWidth: "700px",
+                width: "70%",
+                display: "flex",
+                margin: "3rem auto",
+                gap: ".3rem"
+            }}>
             <TextField
                 sx={{ width: "30%" }}
                 onChange={(e) => setInputTitleText(e.target.value)}
@@ -27,26 +35,17 @@ const Form = ({ addTask }) => {
                 sx={{ width: "70%" }}
                 onChange={(e) => setInputText(e.target.value)}
                 value={inputText}
-                label="Digite sua tarefa"
+                label="Digite sua task"
                 variant="standard" />
-            {inputText && (
-                <Button
-                    sx={{ marginLeft: "5px" }}
-                    onClick={() => validacaoinput(inputTitleText, inputText)}
-                    variant="contained"
-                    component="label">
-                    Salvar
-                    <button></button>
-                </Button>)}
-            {!inputText && (
-                <Button
-                    disabled
-                    sx={{ marginLeft: "5px" }}
-                    onClick={() => validacaoinput(inputTitleText, inputText)}
-                    variant="contained"
-                    component="label">
-                    Salvar
-                </Button>)}
+            <Button
+                disabled={inputText ? false : true}
+                sx={{ marginLeft: "5px" }}
+                onClick={() => validatesInput(inputTitleText, inputText)}
+                variant="contained"
+                component="label">
+                Salvar
+                <button style={{ backgroundColor: "transparent", border: "none" }}></button>
+            </Button>
 
         </form>
     )
@@ -60,12 +59,12 @@ export default Form
 onChange={(e) => setInputTitleText(e.target.value)}
 type="text"
 value={inputTitleText}
-placeholder="Título da tarefa" />
+placeholder="Título da task" />
 
 <input
 onChange={(e) => setInputText(e.target.value)}
 type="text"
 value={inputText}
-placeholder="Digite uma tarefa" /> 
+placeholder="Digite uma task" /> 
 
 */}
