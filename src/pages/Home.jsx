@@ -14,7 +14,8 @@ const Home = () => {
                 titleTask: titleTask,
                 task: inputText,
                 isComplete: false,
-                isFixed: false
+                isFixed: false,
+                creationDate: getDate()
             }
 
             setTasks([...(tasks || []), newTask])
@@ -25,6 +26,10 @@ const Home = () => {
 
     const generateId = () => {
         return Math.floor(Math.random() * 10000)
+    }
+
+    const getDate = () => {
+        return new Date()
     }
 
     const deleteTask = (id) => {
@@ -56,7 +61,8 @@ const Home = () => {
 
     const loadTasks = () => {
         const loadedTasks = JSON.parse(localStorage.getItem("tasks"))
-        const orderedLoadedTasks = loadedTasks.sort((a, b) => (a.isFixed > b.isFixed ? -1 : 1))
+        const orderedDateTasks = loadedTasks.sort((a, b) => (a.creationDate > b.creationDate ? -1: 1))
+        const orderedLoadedTasks = orderedDateTasks.sort((a, b) => (a.isFixed > b.isFixed ? -1 : 1))
         return orderedLoadedTasks
     }
 

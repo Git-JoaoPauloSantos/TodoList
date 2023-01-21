@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -6,12 +6,14 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
+import EditProfile from './EditProfile';
 
 export default function ButtonAppBar() {
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
-        <Toolbar sx={{ height: "100px" }}>
+        <Toolbar sx={{ height: "120px" }}>
           <IconButton
             size="large"
             edge="start"
@@ -23,10 +25,8 @@ export default function ButtonAppBar() {
           <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
             Lista de Tarefas
           </Typography>
-          <Typography sx={{ marginRight: "5px" }}>
-            João Paulo
-          </Typography>
-          <AccountCircle sx={{ width: "38px", height: "38px" }} />
+          <EditProfile />
+          
         </Toolbar>
       </AppBar>
     </Box>

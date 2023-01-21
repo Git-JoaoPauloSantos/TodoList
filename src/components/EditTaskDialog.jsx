@@ -24,8 +24,15 @@ export default function EditTaskDialog({ openEditDialog, dialogHandler, task, ed
             aria-describedby="alert-dialog-description"
             fullWidth
         >
-            <DialogTitle textTransform="uppercase" >
-                Edite a sua tarefa
+            <DialogTitle
+                textTransform="uppercase"
+                display="flex"
+                justifyContent="space-between">
+                <div>Edite a sua tarefa</div>
+                <div
+                    style={{ fontSize: "1rem" }}>
+                    ID: {task.id}
+                </div>
             </DialogTitle>
             <DialogContent>
                 <TextField
