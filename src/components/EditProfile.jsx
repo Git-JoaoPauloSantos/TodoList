@@ -54,7 +54,7 @@ export default function EditProfile() {
     }, [])
 
     const validatesInput = () => {
-        if (newUserName) {
+        if (newUserName && newUserName.length < 20) {
             addUserName(newUserName)
         }
         setNewUserName("")
@@ -73,7 +73,7 @@ export default function EditProfile() {
             >
                 <AccordionSummary
                     onClick={() => handleAccordion()}
-                    expandIcon={<ExpandMoreIcon />}
+                    expandIcon={<ExpandMoreIcon color='inherit' />}
                 >
                     <div style={{
                         display: "flex",
@@ -89,32 +89,32 @@ export default function EditProfile() {
 
                 </AccordionSummary>
                 <AccordionDetails>
-                    <Typography>
+                    <Typography component={"div"}>
                         <div style={{ display: "flex", justifyContent: "space-around" }} >
-                        <input
-                            onChange={(e) => setNewUserName(e.target.value)}
-                            placeholder={userName}
-                            type="text"
-                            style={{
-                                height: "25px",
-                                width: "60%",
-                                marginRight: "3px",
-                                backgroundColor: "transparent",
-                                border: "none",
-                                borderBottom: "1px solid #FFF",
-                                outline: "none",
-                                color: "#FFF",
-                            }}
-                        />
-                        <IconButton
-                            sx={{
-                                maxWidth: "30px",
-                                maxHeight: "30px"
-                            }}
-                            onClick={() => validatesInput()}
-                            color='inherit' >
-                            <DoneAllIcon />
-                        </IconButton>
+                            <input
+                                onChange={(e) => setNewUserName(e.target.value)}
+                                placeholder={(newUserName > 20 ? "nome muinto longo" : userName)}
+                                type="text"
+                                style={{
+                                    height: "25px",
+                                    width: "60%",
+                                    marginRight: "3px",
+                                    backgroundColor: "transparent",
+                                    border: "none",
+                                    borderBottom: "1px solid #FFF",
+                                    outline: "none",
+                                    color: "#FFF",
+                                }}
+                            />
+                            <IconButton
+                                sx={{
+                                    maxWidth: "30px",
+                                    maxHeight: "30px"
+                                }}
+                                onClick={() => validatesInput()}
+                                color='inherit' >
+                                <DoneAllIcon />
+                            </IconButton>
                         </div>
                     </Typography>
                 </AccordionDetails>

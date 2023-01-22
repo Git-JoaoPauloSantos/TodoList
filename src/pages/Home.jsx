@@ -21,7 +21,6 @@ const Home = () => {
             setTasks([...(tasks || []), newTask])
 
         }
-        console.log(tasks)
     }
 
     const generateId = () => {
