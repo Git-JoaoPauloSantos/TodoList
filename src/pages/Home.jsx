@@ -6,6 +6,7 @@ import ButtonAppBar from '../components/AppBar';
 
 const Home = () => {
     const [tasks, setTasks] = useState();
+    const [arrayTasksPesquisa, setArrayTasksPesquisa] = useState()
 
     const addTask = (titleTask, inputText) => {
         if (inputText) {
@@ -22,6 +23,7 @@ const Home = () => {
 
         }
     }
+
 
     const generateId = () => {
         return Math.floor(Math.random() * 10000)
@@ -60,7 +62,7 @@ const Home = () => {
 
     const loadTasks = () => {
         const loadedTasks = JSON.parse(localStorage.getItem("tasks"))
-        const orderedDateTasks = loadedTasks.sort((a, b) => (a.creationDate > b.creationDate ? -1: 1))
+        const orderedDateTasks = loadedTasks.sort((a, b) => (a.creationDate > b.creationDate ? -1 : 1))
         const orderedLoadedTasks = orderedDateTasks.sort((a, b) => (a.isFixed > b.isFixed ? -1 : 1))
         return orderedLoadedTasks
     }
@@ -80,18 +82,40 @@ const Home = () => {
             const orderedLoadedTasks = loadTasks()
 
             setTasks(orderedLoadedTasks)
+
         }
+
     }, [tasks])
 
     useEffect(() => {
         const loadedTasks = loadTasks()
-        
+
         setTasks(loadedTasks)
     }, [])
 
+    const handlerInputPesquisa = (inputPesquisa) => {
+
+        if (inputPesquisa) {
+            const resultado = tasks.filter((task) => task.task.includes(inputPesquisa))
+            setArrayTasksPesquisa(resultado)
+            console.log(resultado)
+        }
+        else {
+            setArrayTasksPesquisa(null)
+        }
+    }
+
+    // useEffect(() => {
+    //     console.log(arrayTasksPesquisa)
+
+    // }, [arrayTasksPesquisa])
+
+
     return (
         <div>
-            <ButtonAppBar />
+            <ButtonAppBar
+                handlerInputPesquisa={handlerInputPesquisa}
+            />
             <Form addTask={addTask} />
             {tasks ? (
                 <ListTodo
@@ -99,7 +123,9 @@ const Home = () => {
                     completeTask={completeTask}
                     deleteTask={deleteTask}
                     fixedTask={fixedTask}
-                    editTask={editTask} />
+                    editTask={editTask}
+                    arrayTasksPesquisa={arrayTasksPesquisa}
+                    handlerInputPesquisa={handlerInputPesquisa} />
             ) : null}
         </div>
 

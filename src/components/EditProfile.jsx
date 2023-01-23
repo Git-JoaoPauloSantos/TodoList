@@ -64,16 +64,18 @@ export default function EditProfile() {
     return (
         <div>
             <Accordion
+            disableGutters={true}
                 expanded={isExpanded}
                 sx={{
                     backgroundColor: "transparent",
                     color: "#FFF",
-                    boxShadow: "none",
+                    boxShadow: "none"
                 }}
             >
                 <AccordionSummary
                     onClick={() => handleAccordion()}
-                    expandIcon={<ExpandMoreIcon color='inherit' />}
+                    sx={{ height: "20px" }}
+                    expandIcon={<ExpandMoreIcon sx={{ color: "#FFF" }} />}
                 >
                     <div style={{
                         display: "flex",

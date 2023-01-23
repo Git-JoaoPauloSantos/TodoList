@@ -83,7 +83,9 @@ const CardTask = ({ task, completeTask, deleteTask, fixedTask, editTask }) => {
                             variant='outlined'
                             color={task.isComplete ? "inherit" : "primary"}
                             onClick={() => completeTask(task.id)}
-                            size="small">Completa</Button>
+                            size="small">
+                            Completa
+                        </Button>
                         <Button
                             variant='outlined'
                             color='error'
