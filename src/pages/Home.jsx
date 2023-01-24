@@ -20,7 +20,6 @@ const Home = () => {
             }
 
             setTasks([...(tasks || []), newTask])
-
         }
     }
 
@@ -34,26 +33,55 @@ const Home = () => {
     }
 
     const deleteTask = (id) => {
-        let newTasks = [...tasks];
-        newTasks = newTasks.filter(task => task.id !== id)
+        // Tratando do Array original com todas as tarefas
+        if (tasks) {
+            let newTasks = [...tasks];
+            newTasks = newTasks.filter(task => task.id !== id)
+            setTasks(newTasks)
+        }
 
-        setTasks(newTasks)
+        // Tratando do Array de pesquisa, com as tarefas pesquisadas
+        if (arrayTasksPesquisa) {
+            let newTasksPesquisa = [...arrayTasksPesquisa]
+            newTasksPesquisa = newTasksPesquisa.filter(task => task.id !== id)
+            setArrayTasksPesquisa(newTasksPesquisa)
+        }
     }
 
     const completeTask = (id) => {
-        let newTasks = [...tasks]
-        const targetTask = newTasks.filter((task) => task.id === id)[0]
-        targetTask.isComplete = !targetTask.isComplete
+        // Tratando do Array original com todas as tarefas
+        if (tasks) {
+            let newTasks = [...tasks]
+            const targetTask = newTasks.filter((task) => task.id === id)[0]
+            targetTask.isComplete = !targetTask.isComplete
+            setTasks(newTasks)
+        }
 
-        setTasks(newTasks)
+        // Tratando do Array de pesquisa, com as tarefas pesquisadas
+        if (arrayTasksPesquisa) {
+            let newTasksPesquisa = [...arrayTasksPesquisa]
+            const targetTaskPesquisa = newTasksPesquisa.filter((task) => task.id === id)[0]
+            targetTaskPesquisa.isComplete = !targetTaskPesquisa.isComplete
+            setArrayTasksPesquisa(newTasksPesquisa)
+        }
     }
 
     const fixedTask = (id) => {
-        let newTasks = [...tasks]
-        const targetTask = newTasks.filter((task) => task.id === id)[0]
-        targetTask.isFixed = !targetTask.isFixed
+        // Tratando do Array original com todas as tarefas
+        if (tasks) {
+            let newTasks = [...tasks]
+            const targetTask = newTasks.filter((task) => task.id === id)[0]
+            targetTask.isFixed = !targetTask.isFixed
+            setTasks(newTasks)
+        }
 
-        setTasks(newTasks)
+        // Tratando do Array de pesquisa, com as tarefas pesquisadas
+        if (arrayTasksPesquisa) {
+            let newTasksPesquisa = [...arrayTasksPesquisa]
+            const targetTaskPesquisa = newTasksPesquisa.filter((task) => task.id === id)[0]
+            targetTaskPesquisa.isFixed = !targetTaskPesquisa.isFixed
+            setArrayTasksPesquisa(newTasksPesquisa)
+        }
     }
 
     const saveTaskLocalStorage = (tasksToSave) => {
@@ -68,24 +96,35 @@ const Home = () => {
     }
 
     const editTask = (id, newTitle, newText) => {
-        let newTasks = [...tasks]
-        const targetTask = newTasks.filter((task) => task.id === id)[0]
-        targetTask.titleTask = newTitle
-        targetTask.task = newText
+        // Tratando do array original
+        if (tasks) {
+            let newTasks = [...tasks]
+            const targetTask = newTasks.filter((task) => task.id === id)[0]
+            targetTask.titleTask = newTitle
+            targetTask.task = newText
+            setTasks(newTasks)
+        }
 
-        setTasks(newTasks)
+        // Tratando do array de pesquisa
+        if (arrayTasksPesquisa) {
+            let newTasksPesquisa = [...arrayTasksPesquisa]
+            const targetTaskPesquisa = newTasksPesquisa.filter((task) => task.id === id)[0]
+            targetTaskPesquisa.titleTask = newTitle
+            targetTaskPesquisa.task = newText
+            setArrayTasksPesquisa(newTasksPesquisa)
+        }
     }
 
     useEffect(() => {
         if (tasks) {
             saveTaskLocalStorage(tasks)
             const orderedLoadedTasks = loadTasks()
-
             setTasks(orderedLoadedTasks)
-
         }
 
     }, [tasks])
+
+    // console.log(tasks)
 
     useEffect(() => {
         const loadedTasks = loadTasks()
@@ -93,22 +132,22 @@ const Home = () => {
         setTasks(loadedTasks)
     }, [])
 
-    const handlerInputPesquisa = (inputPesquisa) => {
 
+    // =======================================================================================
+
+    const handlerInputPesquisa = (inputPesquisa) => {
+        let resultado = tasks
         if (inputPesquisa) {
-            const resultado = tasks.filter((task) => task.task.includes(inputPesquisa))
+            resultado = tasks.filter((task) => task.task.includes(inputPesquisa))
             setArrayTasksPesquisa(resultado)
+
             console.log(resultado)
+            console.log(tasks)
         }
         else {
             setArrayTasksPesquisa(null)
         }
     }
-
-    // useEffect(() => {
-    //     console.log(arrayTasksPesquisa)
-
-    // }, [arrayTasksPesquisa])
 
 
     return (
