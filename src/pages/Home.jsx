@@ -18,8 +18,8 @@ const Home = () => {
                 isFixed: false,
                 creationDate: getDate()
             }
-
-            setTasks([...(tasks || []), newTask])
+            let newTasks = [...tasks || [], newTask]
+            setTasks(newTasks)
         }
     }
 
@@ -41,7 +41,7 @@ const Home = () => {
         }
 
         // Tratando do Array de pesquisa, com as tarefas pesquisadas
-        if (arrayTasksPesquisa) {
+        else if (arrayTasksPesquisa) {
             let newTasksPesquisa = [...arrayTasksPesquisa]
             newTasksPesquisa = newTasksPesquisa.filter(task => task.id !== id)
             setArrayTasksPesquisa(newTasksPesquisa)
@@ -58,7 +58,7 @@ const Home = () => {
         }
 
         // Tratando do Array de pesquisa, com as tarefas pesquisadas
-        if (arrayTasksPesquisa) {
+        else if (arrayTasksPesquisa) {
             let newTasksPesquisa = [...arrayTasksPesquisa]
             const targetTaskPesquisa = newTasksPesquisa.filter((task) => task.id === id)[0]
             targetTaskPesquisa.isComplete = !targetTaskPesquisa.isComplete
@@ -72,27 +72,20 @@ const Home = () => {
             let newTasks = [...tasks]
             const targetTask = newTasks.filter((task) => task.id === id)[0]
             targetTask.isFixed = !targetTask.isFixed
-            setTasks(newTasks)
+            ordenar( newTasks)
         }
 
         // Tratando do Array de pesquisa, com as tarefas pesquisadas
-        if (arrayTasksPesquisa) {
+        else if (arrayTasksPesquisa) {
             let newTasksPesquisa = [...arrayTasksPesquisa]
             const targetTaskPesquisa = newTasksPesquisa.filter((task) => task.id === id)[0]
             targetTaskPesquisa.isFixed = !targetTaskPesquisa.isFixed
-            setArrayTasksPesquisa(newTasksPesquisa)
+            ordenarPesquisa(newTasksPesquisa)
         }
     }
 
     const saveTaskLocalStorage = (tasksToSave) => {
         localStorage.setItem("tasks", JSON.stringify(tasksToSave))
-    }
-
-    const loadTasks = () => {
-        const loadedTasks = JSON.parse(localStorage.getItem("tasks"))
-        const orderedDateTasks = loadedTasks.sort((a, b) => (a.creationDate > b.creationDate ? -1 : 1))
-        const orderedLoadedTasks = orderedDateTasks.sort((a, b) => (a.isFixed > b.isFixed ? -1 : 1))
-        return orderedLoadedTasks
     }
 
     const editTask = (id, newTitle, newText) => {
@@ -106,7 +99,7 @@ const Home = () => {
         }
 
         // Tratando do array de pesquisa
-        if (arrayTasksPesquisa) {
+        else if (arrayTasksPesquisa) {
             let newTasksPesquisa = [...arrayTasksPesquisa]
             const targetTaskPesquisa = newTasksPesquisa.filter((task) => task.id === id)[0]
             targetTaskPesquisa.titleTask = newTitle
@@ -115,21 +108,38 @@ const Home = () => {
         }
     }
 
+    const loadTasks = () => {
+        const loadedTasks = JSON.parse(localStorage.getItem("tasks"))
+        return loadedTasks
+    }
+
+    const ordenar = (array) => {
+        if (array) {
+            // const orderedDateTasks = array.sort((a, b) => (a.creationDate > b.creationDate ? -1 : 1))
+            const orderedTasks = array.sort((a, b) => (a.isFixed > b.isFixed ? -1 : 1))
+            setTasks(orderedTasks)
+        }
+    }
+
+    const ordenarPesquisa = (array) => {
+        if (array) {
+            // const orderedDateTasks = array.sort((a, b) => (a.creationDate > b.creationDate ? -1 : 1))
+            const orderedTasks = array.sort((a, b) => (a.isFixed > b.isFixed ? -1 : 1))
+            setArrayTasksPesquisa(orderedTasks)
+        }
+    }
+
     useEffect(() => {
         if (tasks) {
             saveTaskLocalStorage(tasks)
-            const orderedLoadedTasks = loadTasks()
-            setTasks(orderedLoadedTasks)
         }
-
     }, [tasks])
 
-    // console.log(tasks)
+    console.log(tasks)
 
     useEffect(() => {
-        const loadedTasks = loadTasks()
+        setTasks(loadTasks())
 
-        setTasks(loadedTasks)
     }, [])
 
 
