@@ -72,8 +72,9 @@ const Home = () => {
             let newTasks = [...tasks]
             const targetTask = newTasks.filter((task) => task.id === id)[0]
             targetTask.isFixed = !targetTask.isFixed
-            ordenar( newTasks)
+            ordenar(newTasks)
         }
+
 
         // Tratando do Array de pesquisa, com as tarefas pesquisadas
         else if (arrayTasksPesquisa) {
@@ -82,6 +83,7 @@ const Home = () => {
             targetTaskPesquisa.isFixed = !targetTaskPesquisa.isFixed
             ordenarPesquisa(newTasksPesquisa)
         }
+
     }
 
     const saveTaskLocalStorage = (tasksToSave) => {
@@ -115,7 +117,6 @@ const Home = () => {
 
     const ordenar = (array) => {
         if (array) {
-            // const orderedDateTasks = array.sort((a, b) => (a.creationDate > b.creationDate ? -1 : 1))
             const orderedTasks = array.sort((a, b) => (a.isFixed > b.isFixed ? -1 : 1))
             setTasks(orderedTasks)
         }
@@ -123,7 +124,6 @@ const Home = () => {
 
     const ordenarPesquisa = (array) => {
         if (array) {
-            // const orderedDateTasks = array.sort((a, b) => (a.creationDate > b.creationDate ? -1 : 1))
             const orderedTasks = array.sort((a, b) => (a.isFixed > b.isFixed ? -1 : 1))
             setArrayTasksPesquisa(orderedTasks)
         }
@@ -151,8 +151,6 @@ const Home = () => {
             resultado = tasks.filter((task) => task.task.includes(inputPesquisa))
             setArrayTasksPesquisa(resultado)
 
-            console.log(resultado)
-            console.log(tasks)
         }
         else {
             setArrayTasksPesquisa(null)
